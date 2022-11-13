@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiGatewayUrl: 'http://localhost:6969',
+  appName: 'Healthcare',
+  chatSocket: 'http://localhost:6969/chat'
 };
 
 /*

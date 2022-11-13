@@ -1,0 +1,29 @@
+<div class="search-page">
+    <div class="search-page-center">
+        <div class="search-page-logo">
+            <img
+                src="../../.././../../assets/logo/healthcare.svg"
+                style="width: 350px; height: 350px;"
+            >
+        </div>
+        <div class="search-page-input">
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let hashtag of hashtags" (removed)="remove(hashtag)">
+                  {{hashtag}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="{{ this.hashtags.length ? '' : 'Your symptons go here' }}" 
+                  [matChipInputFor]="chipList" 
+                  (matChipInputTokenEnd)="add($event)"
+                  [matChipInputAddOnBlur]="true" 
+                  [matChipInputSeparatorKeyCodes]="chipInputKeyCodes">
+              </mat-chip-list>
+        </div>
+
+        <div class="search-page-button">
+            <button (click)="testSocket()">Find your doctor</button>
+            <button>See list of doctors</button>
+        </div>
+
+    </div>
+</div>
