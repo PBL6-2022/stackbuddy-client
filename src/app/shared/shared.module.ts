@@ -4,6 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   imports: [
@@ -21,6 +29,14 @@ import { InputTextModule } from 'primeng/inputtext';
     RouterModule,
     HttpClientModule,
     InputTextModule,
-  ]
+    ToastModule,
+    TableModule,
+    CardModule,
+    ConfirmDialogModule,
+    ButtonModule,
+    MessageModule,
+    TieredMenuModule,
+    PaginatorModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

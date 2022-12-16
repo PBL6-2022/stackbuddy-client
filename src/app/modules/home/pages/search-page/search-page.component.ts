@@ -5,6 +5,7 @@ import { Symptomps } from 'src/app/core/constants';
 import { Observable, startWith, map, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { DoctorService } from 'src/app/core/services/doctor.service';
+import { Router } from '@angular/router';
 
 interface City {
   name: string,
@@ -17,7 +18,10 @@ interface City {
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
-  constructor(private doctorService: DoctorService) {
+  constructor(
+    private doctorService: DoctorService,
+    private router: Router,
+  ) {
     this.cities = [
       {
         name: 'Đà Nẵng',
@@ -132,7 +136,7 @@ export class SearchPageComponent implements OnInit {
     chipInputCtrl.value = '';
   }
 
-  findDoctors() {
+  findQuestions() {
     if (this.hashtags.length) {
       this.doctorService.getDoctorsBySymptoms(this.hashtags).subscribe({
         next: (data) => {
@@ -141,6 +145,8 @@ export class SearchPageComponent implements OnInit {
         error: (err) => {},
       });
     }
+
+    this.router.navigate(['/app/questions']);
   }
 
   chooseSymptom(symptom: any) {

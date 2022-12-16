@@ -14,6 +14,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { HomeModule } from './modules/home/home.module';
 import { RatingModule } from 'primeng/rating';
+import { MenubarModule } from 'primeng/menubar';
+import { MessageService } from 'primeng/api';
 
 const config: SocketIoConfig = {
   url: 'http://localhost:6969/chat',
@@ -40,8 +42,11 @@ const config: SocketIoConfig = {
     CoreModule,
     SocketIoModule.forRoot(config),
     RatingModule,
+    MenubarModule,
   ],
-  providers: [],
+  providers: [
+    MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

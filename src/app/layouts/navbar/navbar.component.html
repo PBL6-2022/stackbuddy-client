@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,4 +45,15 @@
     </div>
 
   </div>
-</nav>
+</nav> -->
+
+<p-menubar [model]="items">
+  <!-- <div>
+    
+  </div> -->
+
+  <div>
+    <button pButton pRipple type="button" icon="pi pi-bars" (click)="menu.toggle($event)" class="p-button-rounded p-button-info p-button-outlined"></button>
+    <p-tieredMenu #menu [model]="rightBarItems" [popup]="true"></p-tieredMenu>
+  </div>
+</p-menubar>

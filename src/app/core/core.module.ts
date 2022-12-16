@@ -19,7 +19,7 @@ import { LoginGuard } from './guards/login.guard';
       useClass: TokenInterceptor,
       multi: true
     }
-  ]
+  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

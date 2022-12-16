@@ -1,0 +1,69 @@
+<div class="questions-container">
+
+    <div class="question-container-top">
+        <h3>Questions</h3>
+    </div>
+
+    <div *ngFor="let question of questionsData" class="question">
+        <div class="question-left">
+            <div class="question-left-title">
+                <a href="#">
+                    {{ question.title }}
+                </a>
+            </div>
+
+            <div style="margin-top: 5px;">
+                <button
+                    *ngFor="let tag of question.tags" class="question-left-tags"
+                    pButton
+                    pRipple
+                    type="button"
+                    style="margin-bottom: 2px; padding: 0px 4px; margin-right: 5px; font-weight: 500 !important"
+                    label="{{ tag }}"
+                    class="p-button-outlined p-button-warning label-tags"
+                >
+                </button>
+            </div>
+
+            <div>
+                answered 1 minute ago
+            </div>
+        </div>
+
+        <div class="question-right">
+            <div class="question-right-item">
+                <div>
+                    0
+                </div>
+                <div>
+                    votes
+                </div>
+                <i class="pi pi-thumbs-up"></i>
+            </div>
+
+            <div class="question-right-item">
+                <div>
+                    0
+                </div>
+                <div>
+                    answers
+                </div>
+                <i class="pi pi-reply"></i>
+            </div>
+
+            <div class="question-right-item">
+                <div>
+                    0
+                </div>
+                <div>
+                    views
+                </div>
+                <div>
+                    <i class="pi pi-sign-in"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+
+</div>
