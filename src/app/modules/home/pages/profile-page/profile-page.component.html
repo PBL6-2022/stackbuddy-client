@@ -1,1 +1,48 @@
-<p>profile-page works!</p>
+<div class="profile-container">
+
+    <div class="profile-content">
+        <div class="profile-portfolio">
+            <div class="profile-photo">
+                
+            </div>
+
+        </div>
+
+        <div class="profile-information">
+            <div class="profile-information-name">
+                <h2>Le Quoc Thinh</h2>
+                <h4>@lequocthinh12</h4>
+            </div>
+        </div>
+
+        <div class="profile-editor">
+            <p-tabMenu
+                [model]="items"
+                orientation="vertical"
+                [activeItem]="items[tabIndex]"
+                styleClass=".profile-tabmenu"
+            >
+            </p-tabMenu>
+
+            <div *ngIf="currentProfileTab === 'home'">
+                <app-profile-home
+                >
+                </app-profile-home>
+            </div>
+
+            <div *ngIf="currentProfileTab === 'edit'">
+                <app-profile-edit
+                >
+                </app-profile-edit>
+            </div>
+
+            <div *ngIf="currentProfileTab === 'settings'">
+                <app-profile-setting
+                >
+                </app-profile-setting>
+            </div>
+
+        </div>
+    </div>
+
+</div>

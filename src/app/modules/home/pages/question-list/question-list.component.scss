@@ -24,24 +24,40 @@
         font-family: 'Source Sans Pro', sans-serif;
     
         .question-left {
-            .question-left-title {
-                color: #2596be;
+            display: flex;
+            flex-direction: row;
+
+            .question-left-left {
+                margin-right: 1rem;
+                padding-top: 0.5rem;
+
+                .question-voting {
+                    display: flex;
+                    gap: 0.5rem;
+                    flex-direction: column;
+                }
             }
 
-            .question-left-tags {
-                margin: 7px;
-                margin-left: 0px;
-                display: flex;
-                flex-direction: row;
-
-                .chips-token {
-                    padding: 0 2%;
-                    border: 1px solid gray;
-                    border-radius: 15px;
+            .question-left-right {
+                .question-left-title {
+                    color: #2596be;
                 }
-
-                .label-tags {
-                    font-weight: 500;
+    
+                .question-left-tags {
+                    margin: 7px;
+                    margin-left: 0px;
+                    display: flex;
+                    flex-direction: row;
+    
+                    .chips-token {
+                        padding: 0 2%;
+                        border: 1px solid gray;
+                        border-radius: 15px;
+                    }
+    
+                    .label-tags {
+                        font-weight: 500;
+                    }
                 }
             }
         }

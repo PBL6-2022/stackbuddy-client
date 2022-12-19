@@ -12,7 +12,7 @@ const routesConfiguration: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    canActivate: [],
     component: AppLayoutComponent,
     children: [
       {
@@ -29,7 +29,6 @@ const routesConfiguration: Routes = [
     loadChildren: () =>
       import('src/app/modules/auth/auth.module').then((m) => m.AuthModule),
   },
-  // Fallback when no prior routes is matched
   { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
 ];
 

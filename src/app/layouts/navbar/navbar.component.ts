@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 import { AuthenticationService } from 'src/app/core/services';
 
 @Component({
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {}
 
-  items!: any[];
+  items!: MenuItem[];
   rightBarItems!: any[];
 
   ngOnInit() {
@@ -24,14 +25,17 @@ export class NavbarComponent implements OnInit {
       {
         label: '',
         icon: 'pi pi-fw pi-home',
+        routerLink: ['/app'],
       },
       {
         label: 'Bookmark',
         icon: 'pi pi-fw pi-bookmark',
+        routerLink: ['/app/bookmark'],
       },
       {
         label: 'History',
         icon: 'pi pi-fw pi-history',
+        routerLink: ['/app/logging'],
       },
     ];
 
@@ -39,6 +43,7 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Profile',
         icon: 'pi pi-fw pi-user',
+        routerLink: ['/app/profile'],
       },
       {
         label: 'Trending',
@@ -49,7 +54,8 @@ export class NavbarComponent implements OnInit {
       },
       {
         label: 'Log out',
-        icon: 'pi pi-fw pi-sign-out',  
+        icon: 'pi pi-fw pi-sign-out',
+        command: () => this.logout(),
       }
     ]
   }

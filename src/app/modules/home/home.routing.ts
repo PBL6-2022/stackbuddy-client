@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BlogPageComponent } from './pages/blog-page/blog-page.component';
-import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import { BookmarkPageComponent } from './pages/bookmark-page/bookmark-page.component';
+import { HistoryPageComponent } from './pages/history-page/history-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { QuestionListComponent } from './pages/question-list/question-list.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
@@ -21,10 +21,6 @@ const routesConfiguration: Routes = [
         component: SearchPageComponent,
       },
       {
-        path: 'blogs',
-        component: BlogPageComponent,
-      },
-      {
         path: 'profile',
         component: ProfilePageComponent,
       },
@@ -33,9 +29,13 @@ const routesConfiguration: Routes = [
         component: QuestionListComponent,
       },
       {
-        path: 'booking',
-        component: BookingPageComponent,
-      }
+        path: 'logging',
+        component: HistoryPageComponent,
+      },
+      {
+        path: 'bookmark',
+        component: BookmarkPageComponent,
+      },
     ],
   }
 ];

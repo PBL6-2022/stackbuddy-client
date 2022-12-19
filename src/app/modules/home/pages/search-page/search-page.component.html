@@ -1,14 +1,13 @@
 <div class="search-page">
     <div class="search-page-center">
         <div class="search-page-logo">
-            <img src="../../.././../../assets/logo/logo-02.png" width="600px" height="250px" style="margin-bottom: 10px;">
+            <img src="../../../../../../assets/logo/logo-02.png" width="600px" height="250px" style="margin-bottom: 10px;">
         </div>
         <div class="search-page-input">
             <span class="p-fluid">
                 <p-autoComplete
                     placeholder="Search Query"
                     [(ngModel)]="hashtags"
-                    [suggestions]="filteredSymptoms"
                     (completeMethod)="filterSymptoms($event)"
                     [multiple]="true">
                 </p-autoComplete>

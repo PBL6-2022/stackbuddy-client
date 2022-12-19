@@ -1,0 +1,27 @@
+<div class="edit-container">
+    <div class="edit-content">
+        <form [formGroup]="userInformationForm" (ngSubmit)="onEditInformationFormSubmit()">
+            <div class="input-item">
+                <span class="input-title">
+                    <label for="name">
+                        Name: 
+                    </label>
+                </span>
+                <input formControlName="name"  type="text" pInputText>
+            </div>
+
+            <div class="input-item">
+                <span class="input-title">
+                    <label for="email">
+                        Email:
+                    </label>
+                </span>
+                <input formControlName="email" type="email" pInputText>
+            </div>
+
+            <div class="form-submit">
+                <p-button label="Save" type="submit" icon="pi pi-check" styleClass="p-button-sm"></p-button>
+            </div>
+        </form>
+    </div>
+</div>

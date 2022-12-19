@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { User } from '../models';
+import { IUser, User } from '../models';
 import { environment } from '../../../environments/environment';
+import { AppConstants } from '../constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
-const AccessTokenKey = 'auth-token';
-const RefreshTokenKey = 'auth-refreshtoken';
-const UserKey = 'user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private appConstants: AppConstants,
+  ) {
     this.currentUserSubject = new BehaviorSubject<User>(
       this.getUserFromLocalStorage() as User
     );
@@ -32,9 +33,9 @@ export class AuthenticationService {
     let refreshToken = '';
 
     try {
-      user = JSON.parse(localStorage.getItem('user') || '');
-      accessToken = localStorage.getItem(AccessTokenKey) || '';
-      refreshToken = localStorage.getItem(RefreshTokenKey) || '';
+      user = JSON.parse(localStorage.getItem(this.appConstants.LocalStorageKey.User) || '');
+      accessToken = localStorage.getItem(this.appConstants.LocalStorageKey.UserAccessToken) || '';
+      refreshToken = localStorage.getItem(this.appConstants.LocalStorageKey.UserRefreshToken) || '';
 
       return {
         accessToken,
@@ -71,9 +72,9 @@ export class AuthenticationService {
           const { data } = loginData;
           const { refreshToken, accessToken, ...userData } = data;
 
-          localStorage.setItem(UserKey, JSON.stringify(userData));
-          localStorage.setItem(AccessTokenKey, accessToken);
-          localStorage.setItem(RefreshTokenKey, refreshToken);
+          localStorage.setItem(this.appConstants.LocalStorageKey.User, JSON.stringify(userData));
+          localStorage.setItem(this.appConstants.LocalStorageKey.UserAccessToken, accessToken);
+          localStorage.setItem(this.appConstants.LocalStorageKey.UserRefreshToken, refreshToken);
 
           this.currentUserSubject.next(data);
           return data;
@@ -81,34 +82,44 @@ export class AuthenticationService {
       );
   }
 
-  register(user: User) {
-    const { username, password, email, name, surname } = user;
+  register(user: IUser) {
+    const {
+      username,
+      password,
+      email,
+      name,
+      confirmPassword,
+    } = user;
+
+    if (confirmPassword !== password) {
+      const error = (new Error('password_does_not_match'));
+      return throwError(() => error);
+    }
 
     return this.http.post<any>(
-      `${environment.apiGatewayUrl}/api/v1/auth/register`,
-      {
+      `${environment.apiGatewayUrl}/api/v1/auth/register`, {
         username,
         password,
         email,
         name,
-        surname,
-      },
-      {
+      }, {
         headers: this.initHeaders(),
-      }
+      },
     );
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem(this.appConstants.LocalStorageKey.User);
+    localStorage.removeItem(this.appConstants.LocalStorageKey.UserAccessToken);
+    localStorage.removeItem(this.appConstants.LocalStorageKey.UserRefreshToken);
     this.currentUserSubject.next({} as User);
   }
 
   isSingedIn(): boolean {
     try {
-      const user = JSON.parse(localStorage.getItem(UserKey) || '');
-      const accessToken = localStorage.getItem(AccessTokenKey);
-      const refreshToken = localStorage.getItem(RefreshTokenKey);
+      const user = JSON.parse(localStorage.getItem(this.appConstants.LocalStorageKey.User) || '');
+      const accessToken = localStorage.getItem(this.appConstants.LocalStorageKey.UserAccessToken);
+      const refreshToken = localStorage.getItem(this.appConstants.LocalStorageKey.UserRefreshToken);
 
       if (user && accessToken && refreshToken) {
         return true;
@@ -123,8 +134,7 @@ export class AuthenticationService {
 
   refreshToken(refreshToken: string) {
     return this.http.post(
-      `${environment.apiGatewayUrl}/api/v1/auth/refresh-token`,
-      {
+      `${environment.apiGatewayUrl}/api/v1/auth/refresh-token`, {
         refreshToken,
       },
       httpOptions

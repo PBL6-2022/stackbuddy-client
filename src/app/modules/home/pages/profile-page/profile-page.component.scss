@@ -1,0 +1,49 @@
+.profile-container {
+    width: 100%;
+    height: 100vh;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10vh;
+
+    .profile-content {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid #eceff1;
+        border-radius: 20px;
+
+        .profile-portfolio {
+            background-image: url('../../../../../assets/images/default-cover.svg');
+            background-size: cover;
+            width: 100%;
+            height: 30vh;
+            border-radius: 20px;
+            background-repeat: no-repeat;
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                background-color: red;
+                position: relative;
+                left: 3rem;
+                top: 70%;
+            }
+        }
+
+        .profile-information {
+            margin-top: 1rem;
+            .profile-information-name {
+                margin-left: 18rem;
+            }
+            
+        }
+
+        .profile-editor {
+            margin-top: 2rem;
+        }
+    }
+}
+
+

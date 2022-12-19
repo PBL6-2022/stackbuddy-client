@@ -12,6 +12,10 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { PaginatorModule } from 'primeng/paginator';
+import { TimelineModule } from 'primeng/timeline';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { StyleClassModule } from 'primeng/styleclass';
+
 
 @NgModule({
   imports: [
@@ -37,6 +41,10 @@ import { PaginatorModule } from 'primeng/paginator';
     MessageModule,
     TieredMenuModule,
     PaginatorModule,
+    TimelineModule,
+    InputTextModule,
+    TabMenuModule,
+    StyleClassModule,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

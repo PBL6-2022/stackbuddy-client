@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Symptomps } from 'src/app/core/constants';
 import { Observable, startWith, map, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { DoctorService } from 'src/app/core/services/doctor.service';
@@ -66,6 +65,7 @@ export class SearchPageComponent implements OnInit {
   hospitals: any;
   selectedCity!: City;
   selectedHosptial: any;
+  options: any;
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -84,7 +84,7 @@ export class SearchPageComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
-    return this.options.filter((option) =>
+    return this.options.filter((option: any) =>
       this._normalizeValue(option).includes(filterValue)
     );
   }
@@ -93,7 +93,6 @@ export class SearchPageComponent implements OnInit {
     return value.toLowerCase().replace(/\s/g, '');
   }
 
-  options = Symptomps;
   hashtags: string[] = [];
   chipInputKeyCodes = [ENTER, COMMA];
   maxDistance = 0;
