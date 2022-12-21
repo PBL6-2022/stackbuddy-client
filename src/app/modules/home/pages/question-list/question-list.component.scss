@@ -67,6 +67,12 @@
     
             .question-right-item {
                 padding-right: 2rem;
+
+                .bookmark-items {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
             }
         }
     }

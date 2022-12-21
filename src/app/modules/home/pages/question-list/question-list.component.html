@@ -26,17 +26,13 @@
                         label="{{ tag }}" class="p-button-outlined p-button-warning label-tags">
                     </button>
                 </div>
-    
-                <div>
-                    answered 1 minute ago
-                </div>
             </div>
         </div>
 
         <div class="question-right">
             <div class="question-right-item">
                 <div>
-                    0
+                    ...
                 </div>
                 <div>
                     votes
@@ -46,7 +42,7 @@
 
             <div class="question-right-item">
                 <div>
-                    0
+                    ...
                 </div>
                 <div>
                     answers
@@ -56,13 +52,27 @@
 
             <div class="question-right-item">
                 <div>
-                    0
+                    ...
                 </div>
                 <div>
                     views
                 </div>
                 <div>
                     <i class="pi pi-sign-in"></i>
+                </div>
+            </div>
+
+            <div class="question-right-item">
+                <div class="bookmark-items">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-bookmark"
+                        (click)="bookmark(question)"
+                        class="p-button-rounded p-button-secondary p-button-text"
+                    >
+                    </button>
                 </div>
             </div>
         </div>
