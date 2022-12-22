@@ -4,7 +4,7 @@
         <h3>Questions</h3>
     </div>
 
-    <div *ngFor="let question of questionsData" class="question">
+    <div *ngFor="let question of questions" class="question">
         <div class="question-left">
             <div class="question-left-left">
                 <div class="question-voting">
@@ -15,8 +15,8 @@
 
             <div class="question-left-right">
                 <div class="question-left-title">
-                    <a href="#">
-                        {{ question.title }}
+                    <a href="{{ question.questionUrl }}" target="_blank">
+                        {{ question.title || 'Title' }}
                     </a>
                 </div>
     

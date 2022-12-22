@@ -17,6 +17,21 @@ export class QuestionService {
 
         }
 
-        return this.httpService.get({ url: 'http://localhost:4200/assets/mock/question.json' });
+        // return this.httpService.get({ url: 'http://localhost:3000/assets/mock/question.json' });
+        return this.httpService.get({ url: 'http://localhost:6969/api/v1/questions' }); 
+    }
+
+    wrapQuestionInfo({ indices, scores }: { indices: string[], scores: number[] }) {
+        const questionData = indices.map(
+            (id, index) => {
+                return {
+                    id,
+                    questionUrl: `https://stackoverflow.com/questions/${id}`,
+                    score: scores[index],
+                };
+            },
+        );
+
+        return questionData;
     }
 }

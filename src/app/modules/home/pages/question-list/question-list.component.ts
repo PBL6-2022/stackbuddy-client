@@ -1,3 +1,4 @@
+import { C } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -22,6 +23,7 @@ export class QuestionListComponent extends BaseComponent implements OnInit {
   questionsData: IQuestion[] = [];
   itemPerPage = 5;
   bookmarkQuestions: any;
+  questions: any;
 
   constructor(
     private questionService: QuestionService,
@@ -37,8 +39,21 @@ export class QuestionListComponent extends BaseComponent implements OnInit {
 
   getQuestions(paginateData: IPaginate | null = null) {
     const onNext = (data: any) => {
-      this.questionsData = data as Array<IQuestion>;
-      this.questionsData = this.questionsData.slice(0, this.itemPerPage);
+      console.log({ data });
+      const questionData = data?.data || null;
+      
+      if (!questionData) {
+        return;
+      }
+
+      const {
+        indices,
+        scores,
+      } = questionData;
+
+      const questionInfo: any = this.questionService.wrapQuestionInfo({ indices, scores });
+      this.questions = questionInfo;
+
       this.toastr({
         severity: Severity.Success,
         summary: 'Get question success',
