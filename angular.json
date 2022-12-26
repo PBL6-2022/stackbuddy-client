@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "healthcare-reborn-client": {
+    "stackbuddy-client": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/healthcare-reborn-client",
+            "outputPath": "dist/stackbuddy-client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,25 +53,17 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
-        "webpack-serve": {
-          "builder": "@angular-builders/custom-webpack:browser",
-          "options": {
-            "customWebpackConfig": {
-              "path": "./custom-webpack.config.js",
-              "replaceDuplicatePlugins": true
-            }
-          }
-        },
+
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "healthcare-reborn-client:build:production"
+              "browserTarget": "stackbuddy-client:build:production"
             },
             "development": {
-              "browserTarget": "healthcare-reborn-client:build:development"
+              "browserTarget": "stackbuddy-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "healthcare-reborn-client:build"
+            "browserTarget": "stackbuddy-client:build"
           }
         },
         "test": {

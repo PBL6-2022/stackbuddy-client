@@ -1,6 +1,5 @@
-import { environment as common } from './environment';
-
 export const environment:any = {
-  ...common,
+  apiGatewayUrl: 'http://http://stackbuddy-api.lequocthinh.com',
+  appName: 'Stackbuddy',
   production: true
 };
