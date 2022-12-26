@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
@@ -16,13 +14,6 @@ import { HomeModule } from './modules/home/home.module';
 import { RatingModule } from 'primeng/rating';
 import { MenubarModule } from 'primeng/menubar';
 import { MessageService } from 'primeng/api';
-
-const config: SocketIoConfig = {
-  url: 'http://localhost:6969/chat',
-  options: {
-    transports: ['websocket'],
-  },
-};
 
 @NgModule({
   declarations: [
@@ -40,7 +31,6 @@ const config: SocketIoConfig = {
     HttpClientModule,
     SharedModule,
     CoreModule,
-    SocketIoModule.forRoot(config),
     RatingModule,
     MenubarModule,
   ],
