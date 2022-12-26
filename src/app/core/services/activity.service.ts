@@ -35,12 +35,14 @@ export class ActivityLogService {
     }
 
     buildFromRawData(data: any) {
+        console.log(data);
+
         const wrapUpData = data.map((activityData: any) => {
             const { activity } = activityData;
             return {
                 status: this.StatusMapper[activity.kind](
                     activity.kind === this.Kind.Search ? activity.query
-                        : activity.question.question_url,
+                        : (activity.kind === this.Kind.Login ? '' : activity.question.question_url)
                 ),
                 date: (new Date(activityData.createdAt)).toLocaleString(),
                 icon: this.IconMapper[activity.kind],
