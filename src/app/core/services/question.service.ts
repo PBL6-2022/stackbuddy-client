@@ -12,12 +12,21 @@ export class QuestionService {
         private httpService: HttpService,
     ) {}
 
-    getQuestions(paginateData: IPaginate | null) {
-        if (paginateData) {
+    getQuestions(paginateData: any) {
+        const {
+            rows,
+            page,
+            query,
+        } = paginateData;
 
-        }
-
-        return this.httpService.get({ url: `${this.apiGatewayUrl}/api/v1/questions` }); 
+        return this.httpService.get({
+            url: `${this.apiGatewayUrl}/api/v1/questions`,
+            queryParams: {
+                rows,
+                page,
+                query,
+            },
+        }); 
     }
 
     wrapQuestionInfo({ indices, scores }: { indices: string[], scores: number[] }) {
@@ -35,6 +44,8 @@ export class QuestionService {
     }
 
     getSuggestQuestions(query: string[]) {
+        localStorage.setItem('query-temp', JSON.stringify(query));
+
         return this.httpService.get({
             url: `${this.apiGatewayUrl}/api/v1/questions`,
             queryParams: {

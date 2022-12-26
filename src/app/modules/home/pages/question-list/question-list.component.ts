@@ -22,9 +22,11 @@ export class QuestionListComponent extends BaseComponent implements OnInit, OnDe
   
   questionsData: IQuestion[] = [];
   itemPerPage = 5;
+  currentPage = 0;
   bookmarkQuestions: any;
   questions: any;
   freqTags: any;
+  query: any;
 
   constructor(
     private questionService: QuestionService,
@@ -36,6 +38,7 @@ export class QuestionListComponent extends BaseComponent implements OnInit, OnDe
 
   override ngOnInit(): void {
     const questionData = JSON.parse(localStorage.getItem('qs-data') || '{}');
+    const query = JSON.parse(localStorage.getItem('query-temp') || '[]');
     const {
       posts,
       freqTags,
@@ -43,35 +46,39 @@ export class QuestionListComponent extends BaseComponent implements OnInit, OnDe
 
     this.questions = posts;
     this.freqTags = freqTags;
+    this.query = query;
   }
 
   ngOnDestroy(): void {}
 
-  getQuestions(paginateData: IPaginate | null = null) {
-    const onNext = (data: any) => {
-      console.log({ data });
-      const questionData = data?.data || null;
-      
-      if (!questionData) {
-        return;
-      }
+  getQuestions(paginateData: any) {
+    let {
+      page,
+      rows,
+    } = paginateData;
 
+    page = page || 0;
+    rows = rows || 10;
+
+    const onNext = (data: any) => {
+      const questionData = data?.data || null;
       const {
-        indices,
-        scores,
+        posts,
+        freqTags,
       } = questionData;
 
-      const questionInfo: any = this.questionService.wrapQuestionInfo({ indices, scores });
-      this.questions = questionInfo;
+      this.questions = posts;
+      this.freqTags = freqTags;
 
       this.toastr({
         severity: Severity.Success,
         summary: 'Get question success',
       });
+
       this.getQuestionSubscription.unsubscribe();
     }
 
-    const onError = (error: any) => {
+    const onError = (_error: any) => {
       this.getQuestionSubscription.unsubscribe();
       this.toastr({
         severity: Severity.Error,
@@ -80,7 +87,11 @@ export class QuestionListComponent extends BaseComponent implements OnInit, OnDe
     }
 
     this.getQuestionSubscription = this.questionService
-      .getQuestions(paginateData ? paginateData as IPaginate : null)
+      .getQuestions({
+        rows,
+        page,
+        query: this.query,
+      })
       .subscribe({
         next: (data) => onNext(data),
         error: (error) => onError(error), 
