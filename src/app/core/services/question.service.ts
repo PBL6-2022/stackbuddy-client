@@ -18,7 +18,7 @@ export class QuestionService {
         }
 
         // return this.httpService.get({ url: 'http://localhost:3000/assets/mock/question.json' });
-        return this.httpService.get({ url: 'http://localhost:6969/api/v1/questions' }); 
+        return this.httpService.get({ url: `${this.apiGatewayUrl}/api/v1/questions` }); 
     }
 
     wrapQuestionInfo({ indices, scores }: { indices: string[], scores: number[] }) {
@@ -33,5 +33,26 @@ export class QuestionService {
         );
 
         return questionData;
+    }
+
+    getSuggestQuestions(query: string[]) {
+        return this.httpService.get({
+            url: `${this.apiGatewayUrl}/api/v1/questions`,
+            queryParams: {
+                q: query,
+            },
+        });
+    }
+
+    getBookmarkQuestions() {
+        return this.httpService.get({
+            url: `${this.apiGatewayUrl}/api/v1/bookmarks`,
+        });
+    }
+
+    unBookmark(id: any) {
+        return this.httpService.delete({
+            url: `${this.apiGatewayUrl}/api/v1/bookmarks/${id}`,
+        });
     }
 }

@@ -1,5 +1,5 @@
 import { C } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { BaseComponent } from 'src/app/core/base/component/base/base.component';
@@ -14,7 +14,7 @@ import { QuestionService } from 'src/app/core/services/question.service';
   templateUrl: './question-list.component.html',
   styleUrls: ['./question-list.component.scss']
 })
-export class QuestionListComponent extends BaseComponent implements OnInit {
+export class QuestionListComponent extends BaseComponent implements OnInit, OnDestroy {
 
   private getQuestionSubscription!: Subscription;
   private bookmarkSubscription!: Subscription;
@@ -24,6 +24,7 @@ export class QuestionListComponent extends BaseComponent implements OnInit {
   itemPerPage = 5;
   bookmarkQuestions: any;
   questions: any;
+  freqTags: any;
 
   constructor(
     private questionService: QuestionService,
@@ -34,8 +35,17 @@ export class QuestionListComponent extends BaseComponent implements OnInit {
   }
 
   override ngOnInit(): void {
-    this.getQuestions();
+    const questionData = JSON.parse(localStorage.getItem('qs-data') || '{}');
+    const {
+      posts,
+      freqTags,
+    } = questionData;
+
+    this.questions = posts;
+    this.freqTags = freqTags;
   }
+
+  ngOnDestroy(): void {}
 
   getQuestions(paginateData: IPaginate | null = null) {
     const onNext = (data: any) => {

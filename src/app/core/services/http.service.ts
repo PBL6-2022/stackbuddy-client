@@ -48,6 +48,26 @@ export class HttpService {
         catchError(this.handleError));
   }
 
+  delete({
+    url,
+    queryParams = {},
+    headers = {},
+  }: {
+    url: string;
+    queryParams?: Object;
+    headers?: any;
+  }) {
+    headers = this.initHeaders();
+    return this.http
+      .delete(`${url}`, { headers })
+      .pipe(
+        map(d => {
+          return d;
+        }),
+        retry(1),
+        catchError(this.handleError));
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

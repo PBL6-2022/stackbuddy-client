@@ -20,10 +20,13 @@ export class ActivityLogService {
     };
 
     StatusMapper = {
-        [this.Kind.Login]: 'You logged in',
-        [this.Kind.Bookmark]: () => {
-            return `You bookmark this question: ${'h'}`;
+        [this.Kind.Login]: (_q: any) => 'You logged in',
+        [this.Kind.Bookmark]: (q: any) => {
+            return `You bookmark this question: ${q}`;
         },
+        [this.Kind.Search]: (q: string) => {
+            return `You search this: ${q}`;
+        }
     };
 
     IconMapper = {
@@ -35,7 +38,10 @@ export class ActivityLogService {
         const wrapUpData = data.map((activityData: any) => {
             const { activity } = activityData;
             return {
-                status: this.StatusMapper[activity.kind],
+                status: this.StatusMapper[activity.kind](
+                    activity.kind === this.Kind.Search ? activity.query
+                        : activity.question.question_url,
+                ),
                 date: (new Date(activityData.createdAt)).toLocaleString(),
                 icon: this.IconMapper[activity.kind],
                 data: activityData.data,

@@ -1,1 +1,75 @@
-<p>bookmark-page works!</p>
+<div class="questions-container">
+
+    <div class="question-container-top">
+        <h3>Bookmarked questions</h3>
+    </div>
+
+    <div *ngFor="let question of questions" class="question">
+        <div class="question-left">
+
+            <div class="question-left-right">
+                <div class="question-left-title">
+                    <a href="{{ question.question.question_url }}" target="_blank">
+                        {{ question.question.post_title || 'Title' }}
+                    </a>
+                </div>
+    
+                <div style="margin-top: 5px;">
+                    <button *ngFor="let tag of question.question.tags.split('|')" class="question-left-tags" pButton pRipple type="button"
+                        style="margin-bottom: 2px; padding: 0px 4px; margin-right: 5px; font-weight: 500 !important"
+                        label="{{ tag }}" class="p-button-outlined p-button-warning label-tags">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-right">
+            <div class="question-right-item">
+                <div>
+                    {{ question.question.post_score }}
+                </div>
+                <div>
+                    votes
+                </div>
+                <i class="pi pi-thumbs-up"></i>
+            </div>
+
+            <div class="question-right-item">
+                <div>
+                    ...
+                </div>
+                <div>
+                    answers
+                </div>
+                <i class="pi pi-reply"></i>
+            </div>
+
+            <div class="question-right-item">
+                <div>
+                    {{ question.question.post_view_count }}
+                </div>
+                <div>
+                    views
+                </div>
+                <div>
+                    <i class="pi pi-sign-in"></i>
+                </div>
+            </div>
+
+            <div class="question-right-item">
+                <div class="bookmark-items">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        (click)="unBookmark(question._id)"
+                        icon="pi pi-bookmark-fill"
+                        class="p-button-rounded p-button-secondary p-button-text"
+                    >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

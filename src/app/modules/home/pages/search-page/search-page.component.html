@@ -5,12 +5,12 @@
         </div>
         <div class="search-page-input">
             <span class="p-fluid">
-                <p-autoComplete
+                <input
+                    type="text"
+                    pInputText
                     placeholder="Search Query"
-                    [(ngModel)]="hashtags"
-                    (completeMethod)="filterSymptoms($event)"
+                    [(ngModel)]="query"
                     [multiple]="true">
-                </p-autoComplete>
             </span>
 
         </div>

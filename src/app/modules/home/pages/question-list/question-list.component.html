@@ -1,7 +1,12 @@
 <div class="questions-container">
 
     <div class="question-container-top">
-        <h3>Questions</h3>
+        <h3>Top questions for you</h3>
+        <div class="freq-tags">
+            <span class="question-tag" *ngFor="let item of freqTags | keyvalue">
+                {{ item.key + ': ' +  item.value}}
+            </span>
+        </div>
     </div>
 
     <div *ngFor="let question of questions" class="question">
@@ -15,13 +20,13 @@
 
             <div class="question-left-right">
                 <div class="question-left-title">
-                    <a href="{{ question.questionUrl }}" target="_blank">
-                        {{ question.title || 'Title' }}
+                    <a href="{{ question.data.question_url }}" target="_blank">
+                        {{ question.data.post_title || 'Title' }}
                     </a>
                 </div>
     
                 <div style="margin-top: 5px;">
-                    <button *ngFor="let tag of question.tags" class="question-left-tags" pButton pRipple type="button"
+                    <button *ngFor="let tag of question.data.tags.split('|')" class="question-left-tags" pButton pRipple type="button"
                         style="margin-bottom: 2px; padding: 0px 4px; margin-right: 5px; font-weight: 500 !important"
                         label="{{ tag }}" class="p-button-outlined p-button-warning label-tags">
                     </button>
@@ -32,7 +37,7 @@
         <div class="question-right">
             <div class="question-right-item">
                 <div>
-                    ...
+                    {{ question.data.post_score }}
                 </div>
                 <div>
                     votes
@@ -52,7 +57,7 @@
 
             <div class="question-right-item">
                 <div>
-                    ...
+                    {{ question.data.post_view_count }}
                 </div>
                 <div>
                     views
@@ -69,7 +74,7 @@
                         pRipple
                         type="button"
                         icon="pi pi-bookmark"
-                        (click)="bookmark(question)"
+                        (click)="bookmark(question.data)"
                         class="p-button-rounded p-button-secondary p-button-text"
                     >
                     </button>
