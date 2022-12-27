@@ -16,7 +16,7 @@ export class QuestionService {
         const {
             rows,
             page,
-            query,
+            q,
         } = paginateData;
 
         return this.httpService.get({
@@ -24,7 +24,7 @@ export class QuestionService {
             queryParams: {
                 rows,
                 page,
-                query,
+                q,
             },
         }); 
     }

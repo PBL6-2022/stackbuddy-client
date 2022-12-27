@@ -90,7 +90,7 @@ export class QuestionListComponent extends BaseComponent implements OnInit, OnDe
       .getQuestions({
         rows,
         page,
-        query: this.query,
+        q: this.query,
       })
       .subscribe({
         next: (data) => onNext(data),
