@@ -14,6 +14,17 @@ import { HomeModule } from './modules/home/home.module';
 import { RatingModule } from 'primeng/rating';
 import { MenubarModule } from 'primeng/menubar';
 import { MessageService } from 'primeng/api';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  FacebookLoginProvider
+} from '@abacritt/angularx-social-login';
+
+const fbLoginOptions = {
+  scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list',
+  return_scopes: true,
+  enable_profile_selector: true,
+  version: 'v12.0'
+};
 
 @NgModule({
   declarations: [
@@ -33,9 +44,25 @@ import { MessageService } from 'primeng/api';
     CoreModule,
     RatingModule,
     MenubarModule,
+    SocialLoginModule,
   ],
   providers: [
     MessageService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1491047404759968', fbLoginOptions),
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

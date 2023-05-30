@@ -4,9 +4,11 @@
 
 export const environment = {
   production: false,
-  apiGatewayUrl: 'http://localhost:6969',
+  apiGatewayUrl: 'http://api.tt-chatbot.ink',
+  apiGatewaylocal: 'https://localhost:2999',
   appName: 'Healthcare',
-  chatSocket: 'http://localhost:6969/chat'
+  chatSocket: 'http://localhost:6969/chat',
+  GoogleAuthClientId: '661603811822-udfrl0ijsqtpsplnhdmi2jr8nsgfob0a.apps.googleusercontent.com'
 };
 
 /*

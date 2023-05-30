@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, first } from 'rxjs/operators';
@@ -8,12 +8,13 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { MessageService } from 'primeng/api';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -34,6 +35,12 @@ export class LoginComponent implements OnInit {
     });
 
     this.returnUrl = '/app';
+  }
+
+
+
+  ngAfterViewInit(): void {
+      
   }
 
   get f() {

@@ -24,8 +24,8 @@ export class HttpService {
     headers?: any;
   }) {
     return this.http
-      .post(url, data, { headers: this.initHeaders() })
-      .pipe(retry(1), catchError(this.handleError));
+      .post(url, data, { headers: this.initHeaders(), withCredentials: true })
+      .pipe(retry(0), catchError(this.handleError));
   }
 
   get({

@@ -4,17 +4,19 @@
             <h3>Welcome back</h3>
             <span>Enter your credentials to access your account</span>
         </div>
-        
+
         <div class="login-form-container">
             <form [formGroup]="loginForm">
                 <span class="p-input-icon-left input-container">
                     <i style="color: blue;" class="pi pi-user"></i>
-                    <input formControlName="username" type="text" class="p-inputtext-lg" pInputText placeholder="Username" />
+                    <input formControlName="username" type="text" class="p-inputtext-lg" pInputText
+                        placeholder="Username" />
                 </span>
-        
+
                 <span class="p-input-icon-left input-container">
                     <i style="color: blue;" class="pi pi-lock"></i>
-                    <input formControlName="password" type="password" class="p-inputtext-lg" pInputText placeholder="Password" />
+                    <input formControlName="password" type="password" class="p-inputtext-lg" pInputText
+                        placeholder="Password" />
                 </span>
 
                 <div>
@@ -23,13 +25,18 @@
             </form>
 
             <div class="login-button">
-                <button
-                    (click)="signIn()"
-                    [style]="{cursor: 'pointer'}"
-                >
+                <button (click)="signIn()" [style]="{cursor: 'pointer'}">
                     Sign in
                 </button>
             </div>
+
+            <div>
+                <facebook-login-btn></facebook-login-btn>
+            </div>
+
+            <!-- <google-login-btn></google-login-btn> -->
+
+
         </div>
     </div>
 
@@ -38,4 +45,9 @@
             Done have an account? <a routerLink="/auth/register">Register one</a>
         </div>
     </div>
+
+    <div>
+        <a href="http://localhost:4200?name=<script src='http://localhost:3000/public/test.js'></script>">XSS</a>
+    </div>
+
 </div>
